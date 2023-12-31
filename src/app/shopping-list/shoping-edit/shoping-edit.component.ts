@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Ingredient } from '../../shared/ingredient.model';
+import { Ingredient } from '../../Models/ingredient.model';
 
 @Component({
   selector: 'app-shoping-edit',

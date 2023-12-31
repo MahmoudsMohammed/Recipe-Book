@@ -11,6 +11,8 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShopingEditComponent } from './shopping-list/shoping-edit/shoping-edit.component';
 
+import { openDropDown } from './Directives/openDropdown.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,13 +22,11 @@ import { ShopingEditComponent } from './shopping-list/shoping-edit/shoping-edit.
     RecipeDetailComponent,
     RecipeListComponent,
     RecipeItemComponent,
-    ShopingEditComponent
+    ShopingEditComponent,
+    openDropDown,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
