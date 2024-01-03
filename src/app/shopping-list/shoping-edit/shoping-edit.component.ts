@@ -1,8 +1,6 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { Ingredient } from '../../Models/ingredient.model';

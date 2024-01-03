@@ -6,7 +6,7 @@ import { recipeService } from './recipe.service';
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.css',
-  providers: [recipeService],
+  providers:[recipeService],
 })
 export class RecipesComponent {
   selectedRecpe: Recipe;
@@ -14,5 +14,6 @@ export class RecipesComponent {
   ngOnInit(): void {
     this.recipeServ.bringSelected.subscribe((e) => {
       this.selectedRecpe = e;
-    });}
+    });
+  }
 }

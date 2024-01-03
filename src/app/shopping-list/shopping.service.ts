@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../Models/ingredient.model';
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class shoppingService {
   private ingredients: Ingredient[] = [
-    { name: 'Apple', amount: 5 },
-    { name: 'Tomato', amount: 7 },
+    new Ingredient('Apple', 5),
+    new Ingredient('Banana', 10),
   ];
   get getIngredients(): Ingredient[] {
     return this.ingredients;
