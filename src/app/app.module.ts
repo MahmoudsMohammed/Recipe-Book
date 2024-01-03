@@ -10,7 +10,6 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShopingEditComponent } from './shopping-list/shoping-edit/shoping-edit.component';
-
 import { openDropDown } from './Directives/openDropdown.directive';
 
 @NgModule({
