@@ -3,14 +3,6 @@
     <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-md-7">
-    <app-recipe-detail
-      *ngIf="selectedRecpe; else place"
-      [selectedRecpe]="selectedRecpe"
-    ></app-recipe-detail>
-    <ng-template #place>
-      <p class="alert alert-danger mt-3">
-        Please Select A Recipe To View It's Details
-      </p>
-    </ng-template>
+    <router-outlet></router-outlet>
   </div>
 </div>

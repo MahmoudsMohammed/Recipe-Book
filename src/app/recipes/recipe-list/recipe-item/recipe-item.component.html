@@ -1,17 +1,19 @@
 <a
-      href="#"
-      class="list-group-item d-flex justify-content-between align-items-center"
-    (click)="ontoList()">
-      <div class="">
-        <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
-        <p class="list-group-item-text">{{ recipe.decripe }}</p>
-      </div>
-      <span class="">
-        <img
-          [src]="recipe.imagePath"
-          alt="{{ recipe.name }}"
-          class="img-responsive"
-          style="max-height: 50px"
-        />
-      </span>
-    </a>
+  routerLink="{{ index }}"
+  routerLinkActive="active"
+  style="cursor: pointer"
+  class="list-group-item d-flex justify-content-between align-items-center"
+>
+  <div class="">
+    <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
+    <p class="list-group-item-text">{{ recipe.decripe }}</p>
+  </div>
+  <span class="">
+    <img
+      [src]="recipe.imagePath"
+      alt="{{ recipe.name }}"
+      class="img-responsive"
+      style="max-height: 50px"
+    />
+  </span>
+</a>
