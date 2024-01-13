@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../Models/ingredient.model';
+
 @Injectable({ providedIn: 'root' })
 export class shoppingService {
   private ingredients: Ingredient[] = [
