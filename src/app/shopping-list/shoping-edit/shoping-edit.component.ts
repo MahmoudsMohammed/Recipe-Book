@@ -14,5 +14,6 @@ export class ShopingEditComponent {
   onAddIngredient(form: NgForm) {
     const value = form.value;
     this.shoppingServ.setIngredient = new Ingredient(value.name, +value.amount);
+    form.reset();
   }
 }
