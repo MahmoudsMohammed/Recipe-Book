@@ -22,4 +22,7 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit(): void {
     this.ingredients = this.shoppingServ.getIngredients;
   }
+  onEdit(index: number) {
+    this.shoppingServ.editItem.next(index);
+  }
 }
