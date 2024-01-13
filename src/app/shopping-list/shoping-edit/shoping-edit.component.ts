@@ -48,6 +48,11 @@ export class ShopingEditComponent implements OnInit, OnDestroy {
     this.form.reset();
     this.editMode = false;
   }
+  // handle delete button
+  onDelete() {
+    this.shoppingServ.getIngredients.splice(this.itemEditIndex, 1);
+    this.onClear();
+  }
   ngOnDestroy(): void {
     // avoid memory leak
     this.editSubscribe.unsubscribe();
