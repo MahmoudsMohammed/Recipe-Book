@@ -30,7 +30,7 @@ export class ShopingEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  onAddIngredient(form: NgForm) {
+  onSubmit(form: NgForm) {
     const value = form.value;
     if (this.editMode) {
       this.shoppingServ.getIngredients[this.itemEditIndex] = value;
@@ -42,6 +42,11 @@ export class ShopingEditComponent implements OnInit, OnDestroy {
       );
     }
     form.reset();
+  }
+  // handle clear button
+  onClear() {
+    this.form.reset();
+    this.editMode = false;
   }
   ngOnDestroy(): void {
     // avoid memory leak
