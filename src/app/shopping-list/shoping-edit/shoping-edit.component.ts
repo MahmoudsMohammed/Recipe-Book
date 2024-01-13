@@ -1,30 +1,50 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from '../../Models/ingredient.model';
 import { shoppingService } from '../shopping.service';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shoping-edit',
   templateUrl: './shoping-edit.component.html',
   styleUrl: './shoping-edit.component.css',
 })
-export class ShopingEditComponent implements OnInit {
+export class ShopingEditComponent implements OnInit, OnDestroy {
   // { static: false } important because will use at ngOnInit
   @ViewChild('form', { static: false }) form;
+  editSubscribe: Subscription;
+  editMode = false;
+  itemEdit: Ingredient;
+  itemEditIndex: number;
   constructor(private shoppingServ: shoppingService) {}
 
   ngOnInit(): void {
-    this.shoppingServ.editItem.subscribe((index) => {
+    this.editSubscribe = this.shoppingServ.editItem.subscribe((index) => {
+      this.itemEditIndex = index;
+      this.editMode = true;
+      this.itemEdit = this.shoppingServ.getIngredients[index];
       this.form.setValue({
-        name: this.shoppingServ.getIngredients[index].name,
-        amount: this.shoppingServ.getIngredients[index].amount,
+        name: this.itemEdit.name,
+        amount: this.itemEdit.amount,
       });
     });
   }
 
   onAddIngredient(form: NgForm) {
     const value = form.value;
-    this.shoppingServ.setIngredient = new Ingredient(value.name, +value.amount);
+    if (this.editMode) {
+      this.shoppingServ.getIngredients[this.itemEditIndex] = value;
+      this.editMode = false;
+    } else {
+      this.shoppingServ.setIngredient = new Ingredient(
+        value.name,
+        +value.amount
+      );
+    }
     form.reset();
+  }
+  ngOnDestroy(): void {
+    // avoid memory leak
+    this.editSubscribe.unsubscribe();
   }
 }
