@@ -1,1 +1,66 @@
-<p>new-recipe works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-success me-3">Save</button>
+        <button class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+    <form>
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" />
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="url">Image Url</label>
+            <input type="text" class="form-control" id="url" />
+          </div>
+        </div>
+      </div>
+      <div class="row d-none">
+        <div class="col-12">
+          <img src="" alt="" />
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              rows="10"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-9">
+              <div class="form-group">
+                <label for="ingredient">Ingredient</label>
+                <input type="text" class="form-control" id="ingredient" />
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="ing-amout">Amount</label>
+                <input type="number" class="form-control" id="ing-amout" />
+              </div>
+            </div>
+            <div class="col-1 d-flex align-items-end">
+              <button class="btn btn-danger">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
