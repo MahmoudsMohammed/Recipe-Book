@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { recipeService } from '../recipe.service';
 
@@ -26,17 +26,33 @@ export class NewRecipeComponent implements OnInit {
   private initForm() {
     let recipeName = '',
       recipeImageUrl = '',
-      recipeDescription = '';
+      recipeDescription = '',
+      recipeIngredient = new FormArray([]);
     if (this.editMode) {
       recipeName = this.recipeServ.Recipes[this.id].name;
       recipeImageUrl = this.recipeServ.Recipes[this.id].imagePath;
       recipeDescription = this.recipeServ.Recipes[this.id].decripe;
+      if (this.recipeServ.Recipes[this.id].ingred) {
+        for (let ingred of this.recipeServ.Recipes[this.id].ingred) {
+          recipeIngredient.push(
+            new FormGroup({
+              name: new FormControl(ingred.name),
+              amount: new FormControl(ingred.amount),
+            })
+          );
+        }
+      }
     }
     this.reactiveForm = new FormGroup({
       name: new FormControl(recipeName),
       url: new FormControl(recipeImageUrl),
       descripe: new FormControl(recipeDescription),
+      ingred: recipeIngredient,
     });
+  }
+
+  get Controls() {
+    return (this.reactiveForm.get('ingred') as FormArray).controls;
   }
 
   onSubmit() {

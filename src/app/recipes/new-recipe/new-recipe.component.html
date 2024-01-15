@@ -52,18 +52,32 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
-          <div class="row">
+        <div class="col-12" formArrayName="ingred">
+          <div
+            class="row mb-3"
+            *ngFor="let con of Controls; let i = index"
+            [formGroupName]="i"
+          >
             <div class="col-9">
               <div class="form-group">
                 <label for="ingredient">Ingredient</label>
-                <input type="text" class="form-control" id="ingredient" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ingredient"
+                  formControlName="name"
+                />
               </div>
             </div>
             <div class="col-2">
               <div class="form-group">
                 <label for="ing-amout">Amount</label>
-                <input type="number" class="form-control" id="ing-amout" />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="ing-amout"
+                  formControlName="amount"
+                />
               </div>
             </div>
             <div class="col-1 d-flex align-items-end">
