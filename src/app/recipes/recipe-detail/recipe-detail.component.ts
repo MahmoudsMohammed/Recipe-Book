@@ -9,6 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrl: './recipe-detail.component.css',
 })
 export class RecipeDetailComponent implements OnInit {
+  private index: number;
   private shoppingList: shoppingService;
   private recService: recipeService;
   selectedRecpe: Recipe;
@@ -18,7 +19,8 @@ export class RecipeDetailComponent implements OnInit {
   }
   ngOnInit(): void {
     this.curRoute.params.subscribe((e: Params) => {
-      this.selectedRecpe = this.recService.Recipes[+`${e['id']}`];
+      this.index = +e['id'];
+      this.selectedRecpe = this.recService.Recipes[this.index];
     });
   }
   // add ingredient to shopping service
@@ -27,5 +29,10 @@ export class RecipeDetailComponent implements OnInit {
       this.shoppingList.setIngredient = el;
     });
     e.preventDefault();
+  }
+
+  onDelete() {
+    this.recService.Recipes.splice(this.index, 1);
+    this.route.navigate(['../'], { relativeTo: this.curRoute });
   }
 }

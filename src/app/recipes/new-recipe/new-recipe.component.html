@@ -10,7 +10,9 @@
           >
             Save
           </button>
-          <button class="btn btn-danger" type="button">Cancel</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">
+            Cancel
+          </button>
         </div>
       </div>
       <div class="row mt-3">
@@ -39,9 +41,13 @@
           </div>
         </div>
       </div>
-      <div class="row d-none">
+      <div class="row">
         <div class="col-12">
-          <img src="" alt="" />
+          <img
+            [src]="reactiveForm.get('imagePath').value"
+            class="img-fluid"
+            alt=""
+          />
         </div>
       </div>
       <div class="row my-3">
@@ -93,7 +99,11 @@
         </div>
       </div>
       <hr />
-      <button class="btn btn-success mb-5" type="button" (click)="onAddIngredient()">
+      <button
+        class="btn btn-success mb-5"
+        type="button"
+        (click)="onAddIngredient()"
+      >
         Add Ingredient
       </button>
     </form>

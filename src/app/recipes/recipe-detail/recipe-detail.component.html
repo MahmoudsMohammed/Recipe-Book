@@ -5,7 +5,11 @@
 </div>
 <div class="row my-3">
   <div class="col-xs-12">
-    <img src="{{ selectedRecpe.imagePath }}" alt="" class="img-responsive" />
+    <img
+      class="img-fluid"
+      src="{{ selectedRecpe.imagePath }}"
+      alt=""
+    />
   </div>
 </div>
 <div class="row">
@@ -32,15 +36,14 @@
           >
         </li>
         <li>
-          <a
-            class="dropdown-item"
-            style="cursor: pointer"
-            routerLink="edit"
+          <a class="dropdown-item" style="cursor: pointer" routerLink="edit"
             >Edit Recipe</a
           >
         </li>
         <li>
-          <a class="dropdown-item" style="cursor: pointer">Delete Recipe</a>
+          <a class="dropdown-item" style="cursor: pointer" (click)="onDelete()"
+            >Delete Recipe</a
+          >
         </li>
       </ul>
     </div>
