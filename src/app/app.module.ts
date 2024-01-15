@@ -13,7 +13,7 @@ import { ShopingEditComponent } from './shopping-list/shoping-edit/shoping-edit.
 import { openDropDown } from './Directives/openDropdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     RecipeStartComponent,
     NewRecipeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
