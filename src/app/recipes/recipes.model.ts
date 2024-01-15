@@ -3,7 +3,7 @@ import { Ingredient } from '../Models/ingredient.model';
 export class Recipe {
   constructor(
     public name: string,
-    public decripe: string,
+    public descripe: string,
     public imagePath: string,
     public ingred: Ingredient[]
   ) {}

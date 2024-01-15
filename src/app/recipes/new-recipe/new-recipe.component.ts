@@ -18,7 +18,7 @@ export class NewRecipeComponent implements OnInit {
   reactiveForm: FormGroup;
 
   ngOnInit(): void {
-    // determine the mode 
+    // determine the mode
     this.actRoute.params.subscribe((par: Params) => {
       this.id = +par['id'];
       this.editMode = par['id'] != null;
@@ -35,7 +35,7 @@ export class NewRecipeComponent implements OnInit {
     if (this.editMode) {
       recipeName = this.recipeServ.Recipes[this.id].name;
       recipeImageUrl = this.recipeServ.Recipes[this.id].imagePath;
-      recipeDescription = this.recipeServ.Recipes[this.id].decripe;
+      recipeDescription = this.recipeServ.Recipes[this.id].descripe;
       if (this.recipeServ.Recipes[this.id].ingred) {
         for (let ingred of this.recipeServ.Recipes[this.id].ingred) {
           recipeIngredient.push(
@@ -52,7 +52,7 @@ export class NewRecipeComponent implements OnInit {
     }
     this.reactiveForm = new FormGroup({
       name: new FormControl(recipeName, Validators.required),
-      url: new FormControl(recipeImageUrl, Validators.required),
+      imagePath: new FormControl(recipeImageUrl, Validators.required),
       descripe: new FormControl(recipeDescription, Validators.required),
       ingred: recipeIngredient,
     });
@@ -71,12 +71,16 @@ export class NewRecipeComponent implements OnInit {
     );
   }
 
-  // get contorls from form array to loop over 
+  // get contorls from form array to loop over
   get Controls() {
     return (this.reactiveForm.get('ingred') as FormArray).controls;
   }
 
   onSubmit() {
-    console.log(this.reactiveForm.value);
+    if (this.editMode) {
+      this.recipeServ.updateRecipe(this.id, this.reactiveForm.value);
+    } else {
+      this.recipeServ.newRecipe(this.reactiveForm.value);
+    }
   }
 }

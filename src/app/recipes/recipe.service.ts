@@ -19,6 +19,12 @@ export class recipeService {
     ),
   ];
   get Recipes() {
-    return this.recipes.slice();
+    return this.recipes;
+  }
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
+  }
+  newRecipe(newRecipe: Recipe) {
+    this.recipes.push(newRecipe);
   }
 }
