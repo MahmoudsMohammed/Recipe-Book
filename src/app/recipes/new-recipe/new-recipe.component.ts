@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { recipeService } from '../recipe.service';
 
@@ -16,13 +16,17 @@ export class NewRecipeComponent implements OnInit {
   id: number;
   editMode: boolean = false;
   reactiveForm: FormGroup;
+
   ngOnInit(): void {
+    // determine the mode 
     this.actRoute.params.subscribe((par: Params) => {
       this.id = +par['id'];
       this.editMode = par['id'] != null;
       this.initForm();
     });
   }
+
+  // function create reactive form
   private initForm() {
     let recipeName = '',
       recipeImageUrl = '',
@@ -36,21 +40,38 @@ export class NewRecipeComponent implements OnInit {
         for (let ingred of this.recipeServ.Recipes[this.id].ingred) {
           recipeIngredient.push(
             new FormGroup({
-              name: new FormControl(ingred.name),
-              amount: new FormControl(ingred.amount),
+              name: new FormControl(ingred.name, Validators.required),
+              amount: new FormControl(ingred.amount, [
+                Validators.required,
+                Validators.pattern(/^[1-9]+[0-9]*$/),
+              ]),
             })
           );
         }
       }
     }
     this.reactiveForm = new FormGroup({
-      name: new FormControl(recipeName),
-      url: new FormControl(recipeImageUrl),
-      descripe: new FormControl(recipeDescription),
+      name: new FormControl(recipeName, Validators.required),
+      url: new FormControl(recipeImageUrl, Validators.required),
+      descripe: new FormControl(recipeDescription, Validators.required),
       ingred: recipeIngredient,
     });
   }
 
+  // add new ingredient
+  onAddIngredient() {
+    (this.reactiveForm.get('ingred') as FormArray).push(
+      new FormGroup({
+        name: new FormControl(null, Validators.required),
+        amount: new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/),
+        ]),
+      })
+    );
+  }
+
+  // get contorls from form array to loop over 
   get Controls() {
     return (this.reactiveForm.get('ingred') as FormArray).controls;
   }
