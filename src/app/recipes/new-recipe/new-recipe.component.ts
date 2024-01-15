@@ -80,15 +80,17 @@ export class NewRecipeComponent implements OnInit {
   onSubmit() {
     if (this.editMode) {
       this.recipeServ.updateRecipe(this.id, this.reactiveForm.value);
-      this.reactiveForm.reset();
     } else {
       this.recipeServ.newRecipe(this.reactiveForm.value);
-      this.reactiveForm.reset();
     }
     this.route.navigate(['../'], { relativeTo: this.actRoute });
   }
 
   onCancel() {
     this.route.navigate(['../'], { relativeTo: this.actRoute });
+  }
+
+  onDeleteIngredient(index: number) {
+    (this.reactiveForm.get('ingred') as FormArray).removeAt(index);
   }
 }
