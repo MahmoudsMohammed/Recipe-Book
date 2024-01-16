@@ -11,4 +11,7 @@ export class HeaderComponent {
   onSaveData() {
     this.httpServ.sendData();
   }
+  onFetchData() {
+    this.httpServ.fetchData();
+  }
 }
