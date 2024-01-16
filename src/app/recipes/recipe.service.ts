@@ -21,6 +21,9 @@ export class recipeService {
   get Recipes() {
     return this.recipes;
   }
+  set setRecipes(recipe: Recipe[]) {
+    this.recipes = recipe;
+  }
   updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
   }
