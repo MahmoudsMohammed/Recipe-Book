@@ -6,6 +6,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
+import { recipeRecolverGuard } from './recipes/resolve.guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipe', pathMatch: 'full' },
@@ -15,8 +16,16 @@ const routes: Routes = [
     children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: NewRecipeComponent },
-      { path: ':id', component: RecipeDetailComponent },
-      { path: ':id/edit', component: NewRecipeComponent },
+      {
+        path: ':id',
+        component: RecipeDetailComponent,
+        resolve: [recipeRecolverGuard],
+      },
+      {
+        path: ':id/edit',
+        component: NewRecipeComponent,
+        resolve: [recipeRecolverGuard],
+      },
     ],
   },
   { path: 'shopping', component: ShoppingListComponent },
