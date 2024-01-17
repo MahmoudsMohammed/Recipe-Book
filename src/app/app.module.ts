@@ -15,6 +15,7 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { authComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     openDropDown,
     RecipeStartComponent,
     NewRecipeComponent,
+    authComponent,
   ],
   imports: [
     BrowserModule,
