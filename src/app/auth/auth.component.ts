@@ -10,6 +10,7 @@ export class authComponent {
   constructor(private authServ: authService) {}
   login = true;
   isloading = false;
+  error: string = null;
   onSwitchMode() {
     this.login = !this.login;
   }
@@ -29,8 +30,8 @@ export class authComponent {
           console.log(response);
           this.isloading = false;
         },
-        (error) => {
-          console.log(error);
+        (errorMessage) => {
+          this.error = errorMessage;
           this.isloading = false;
         }
       );
