@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-12 col-md-6 mx-auto">
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div *ngIf="isloading" class="d-flex justify-content-center mt-5">
+      <spinner></spinner>
+    </div>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" *ngIf="!isloading">
       <div class="form-group">
         <label for="email">Email</label>
         <input
