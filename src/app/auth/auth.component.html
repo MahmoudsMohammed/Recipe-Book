@@ -10,8 +10,13 @@
         <input type="password" id="password" class="form-control" />
       </div>
       <div class="d-felx align-items-center mt-3">
-        <button class="btn btn-success">Sign Up</button> |
-        <button class="btn btn-primary">Switch to Login</button>
+        <button class="btn btn-success" type="submit">
+          {{ login ? "Login" : "Sign Up" }}
+        </button>
+        |
+        <button class="btn btn-primary" type="button" (click)="onSwitchMode()">
+          Switch to {{ login ? "Sign Up" : "Login" }}
+        </button>
       </div>
     </form>
   </div>
