@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'auth',
@@ -8,5 +9,8 @@ export class authComponent {
   login = true;
   onSwitchMode() {
     this.login = !this.login;
+  }
+  onSubmit(form: NgForm) {
+    form.reset();
   }
 }
