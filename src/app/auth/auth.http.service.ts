@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { Subject, catchError, throwError, tap } from 'rxjs';
+import { user } from './user.model';
 
 export interface authResponse {
   idToken: string;
@@ -14,6 +15,8 @@ export interface authResponse {
 @Injectable({ providedIn: 'root' })
 export class authService {
   constructor(private http: HttpClient) {}
+  userSub = new Subject<user>();
+
   signUp(email: string, password: string) {
     return this.http
       .post<authResponse>(
@@ -24,7 +27,12 @@ export class authService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.httpErrorHandle));
+      .pipe(
+        catchError(this.httpErrorHandle),
+        tap((res) => {
+          this.createUser(res.email, res.localId, res.idToken, res.expiresIn);
+        })
+      );
   }
 
   login(email: string, password: string) {
@@ -37,7 +45,13 @@ export class authService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.httpErrorHandle));
+      .pipe(
+        catchError(this.httpErrorHandle),
+        // create user
+        tap((res) => {
+          this.createUser(res.email, res.localId, res.idToken, res.expiresIn);
+        })
+      );
   }
   // Private Method Which Handle Errors at Requests
   private httpErrorHandle(error: HttpErrorResponse) {
@@ -61,5 +75,17 @@ export class authService {
       }
     }
     return throwError(message);
+  }
+
+  // Create User
+  private createUser(
+    email: string,
+    id: string,
+    token: string,
+    expiresIn: string | Date
+  ) {
+    expiresIn = new Date(new Date().getTime() + +expiresIn * 1000);
+    const newUser = new user(email, id, token, expiresIn);
+    this.userSub.next(newUser);
   }
 }
