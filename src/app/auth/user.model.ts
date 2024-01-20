@@ -8,7 +8,8 @@ export class user {
 
   get token() {
     // check if token expire or not
-    if (this._expiresIn < new Date() || !this._expiresIn) {
+    if (!this._expiresIn || new Date() > this._expiresIn) {
+      console.log('from Model' + this._expiresIn);
       return null;
     } else {
       return this._token;

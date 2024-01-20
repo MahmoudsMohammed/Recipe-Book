@@ -10,7 +10,6 @@ export class httpService {
   constructor(
     private http: HttpClient,
     private recipeServ: recipeService,
-    private authServ: authService
   ) {}
   sendData() {
     this.http
