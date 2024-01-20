@@ -105,6 +105,7 @@ export class authService {
   logout() {
     this.userSub.next(null);
     this.router.navigate(['/auth']);
+    localStorage.clear();
   }
 
   // Create User
