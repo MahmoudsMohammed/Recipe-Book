@@ -8,11 +8,12 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
 import { recipeRecolverGuard } from './recipes/resolve.guard.service';
 import { authComponent } from './auth/auth.component';
-
+import { authGuard } from './auth/auth.service.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/recipe', pathMatch: 'full' },
   {
     path: 'recipe',
+    canActivate: [authGuard],
     component: RecipesComponent,
     children: [
       { path: '', component: RecipeStartComponent },
