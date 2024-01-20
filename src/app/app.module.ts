@@ -14,9 +14,10 @@ import { openDropDown } from './Directives/openDropdown.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { authComponent } from './auth/auth.component';
 import { spinnerComponent } from './Shared/spinner/spinner-component';
+import { authInterceptor } from './auth/auth.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { spinnerComponent } from './Shared/spinner/spinner-component';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: authInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

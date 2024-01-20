@@ -23,24 +23,19 @@ export class httpService {
       });
   }
   fetchData() {
-    return this.authServ.userSub.pipe(
-      take(1),
-      exhaustMap(user => {
-        return this.http.get<Recipe[]>(
-          'https://recipe-book-4a739-default-rtdb.firebaseio.com/recipe.json',
-          {
-            params: new HttpParams().set('auth', user.token),
-          }
-        );
-      }),
-      map((res) => {
-        return res.map((e) => {
-          return { ...e, ingred: e.ingred ? e.ingred : [] };
-        });
-      }),
-      tap((res) => {
-        this.recipeServ.setRecipes(res);
-      })
-    );
+    return this.http
+      .get<Recipe[]>(
+        'https://recipe-book-4a739-default-rtdb.firebaseio.com/recipe.json'
+      )
+      .pipe(
+        map((res) => {
+          return res.map((e) => {
+            return { ...e, ingred: e.ingred ? e.ingred : [] };
+          });
+        }),
+        tap((res) => {
+          this.recipeServ.setRecipes(res);
+        })
+      );
   }
 }
