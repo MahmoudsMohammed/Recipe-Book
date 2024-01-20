@@ -1,12 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { recipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipes.model';
-import { map, tap } from 'rxjs/operators';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
+import { authService } from '../auth/auth.http.service';
 
 @Injectable({ providedIn: 'root' })
 export class httpService {
-  constructor(private http: HttpClient, private recipeServ: recipeService) {}
+  constructor(
+    private http: HttpClient,
+    private recipeServ: recipeService,
+    private authServ: authService
+  ) {}
   sendData() {
     this.http
       .put<Recipe[]>(
@@ -18,19 +23,24 @@ export class httpService {
       });
   }
   fetchData() {
-    return this.http
-      .get<Recipe[]>(
-        'https://recipe-book-4a739-default-rtdb.firebaseio.com/recipe.json'
-      )
-      .pipe(
-        map((res) => {
-          return res.map((e) => {
-            return { ...e, ingred: e.ingred ? e.ingred : [] };
-          });
-        }),
-        tap((res) => {
-          this.recipeServ.setRecipes(res);
-        })
-      );
+    return this.authServ.userSub.pipe(
+      take(1),
+      exhaustMap(user => {
+        return this.http.get<Recipe[]>(
+          'https://recipe-book-4a739-default-rtdb.firebaseio.com/recipe.json',
+          {
+            params: new HttpParams().set('auth', user.token),
+          }
+        );
+      }),
+      map((res) => {
+        return res.map((e) => {
+          return { ...e, ingred: e.ingred ? e.ingred : [] };
+        });
+      }),
+      tap((res) => {
+        this.recipeServ.setRecipes(res);
+      })
+    );
   }
 }
