@@ -17,6 +17,7 @@ export interface authResponse {
 export class authService {
   constructor(private http: HttpClient, private router: Router) {}
   userSub = new BehaviorSubject<user>(null);
+  logoutTimer: any;
 
   autoLogin() {
     // create user from user data store at LS
@@ -34,12 +35,22 @@ export class authService {
       lsUser.email,
       lsUser.id,
       lsUser._token,
-      lsUser._expiresIn
+      new Date(lsUser._expiresIn)
     );
     // Check if token still valid or not if valid emmit user
     if (newUser.token) {
       this.userSub.next(newUser);
+      console.log(new Date(lsUser._expiresIn).getTime() - new Date().getTime());
+      this.autoLogout(
+        new Date(lsUser._expiresIn).getTime() - new Date().getTime()
+      );
     }
+  }
+
+  autoLogout(time: number) {
+    this.logoutTimer = setTimeout(() => {
+      this.logout();
+    }, time);
   }
 
   signUp(email: string, password: string) {
@@ -105,6 +116,7 @@ export class authService {
   logout() {
     this.userSub.next(null);
     this.router.navigate(['/auth']);
+    clearInterval(this.logoutTimer);
     localStorage.clear();
   }
 
@@ -118,6 +130,7 @@ export class authService {
     expiresIn = new Date(new Date().getTime() + +expiresIn * 1000);
     const newUser = new user(email, id, token, expiresIn);
     this.userSub.next(newUser);
+    this.autoLogout(expiresIn.getTime());
     localStorage.setItem('userData', JSON.stringify(newUser));
   }
 }
