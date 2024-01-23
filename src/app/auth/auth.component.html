@@ -1,13 +1,15 @@
+<ng-template placeholder></ng-template>
 <div class="row">
   <div class="col-12 col-md-6 mx-auto">
     <div *ngIf="isloading" class="d-flex justify-content-center mt-5">
       <spinner></spinner>
     </div>
-    <alert-component
+    <!-- ngIf to create Dynamic Component -->
+    <!-- <alert-component
       [message]="error"
       *ngIf="error"
       (close)="onErrorHandel()"
-    ></alert-component>
+    ></alert-component> -->
     <form #form="ngForm" (ngSubmit)="onSubmit(form)" *ngIf="!isloading">
       <div class="form-group">
         <label for="email">Email</label>

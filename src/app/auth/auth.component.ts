@@ -1,18 +1,32 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { authService, authResponse } from './auth.http.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { alertComponent } from '../Shared/alert/alert.component';
+import { helperDirective } from '../Shared/helper.directive';
 
 @Component({
   selector: 'auth',
   templateUrl: './auth.component.html',
 })
-export class authComponent {
-  constructor(private authServ: authService, private router: Router) {}
+export class authComponent implements OnDestroy {
+  constructor(
+    private authServ: authService,
+    private router: Router,
+    private cFactoryResolver: ComponentFactoryResolver
+  ) {}
   login = true;
   isloading = false;
   error: string = null;
+  closeSub: Subscription;
+  // reference for first type of this directive in the template
+  @ViewChild(helperDirective) viewRefe: helperDirective;
   onSwitchMode() {
     this.login = !this.login;
   }
@@ -42,6 +56,7 @@ export class authComponent {
       },
       (errorMessage) => {
         this.error = errorMessage;
+        this.showAlertComponent(errorMessage);
         this.isloading = false;
         console.log(errorMessage);
       }
@@ -51,5 +66,27 @@ export class authComponent {
   // reset the error to remove error component
   onErrorHandel() {
     this.error = null;
+  }
+  showAlertComponent(message: string) {
+    // return component factory
+    const cFactory =
+      this.cFactoryResolver.resolveComponentFactory(alertComponent);
+    // clear the place before create the component
+    this.viewRefe.viewContainer.clear();
+    // use the component factory to create component
+    const comRef = this.viewRefe.viewContainer.createComponent(cFactory);
+    // use component instance to make property bind
+    comRef.instance.message = message;
+    this.closeSub = comRef.instance.close.subscribe(() => {
+      this.closeSub.unsubscribe();
+      this.viewRefe.viewContainer.clear();
+    });
+  }
+  ngOnDestroy(): void {
+    if (this.closeSub) {
+      console.log('Not');
+    } else {
+      console.log('Done');
+    }
   }
 }
