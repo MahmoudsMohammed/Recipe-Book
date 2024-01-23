@@ -3,9 +3,11 @@
     <div *ngIf="isloading" class="d-flex justify-content-center mt-5">
       <spinner></spinner>
     </div>
-    <div class="alert alert-danger" *ngIf="error">
-      <p class="p-0 m-0">{{ error }}</p>
-    </div>
+    <alert-component
+      [message]="error"
+      *ngIf="error"
+      (close)="onErrorHandel()"
+    ></alert-component>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)" *ngIf="!isloading">
       <div class="form-group">
         <label for="email">Email</label>
