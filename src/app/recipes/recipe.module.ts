@@ -8,6 +8,7 @@ import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { recipeRoutingModule } from './recipe-routing-module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,12 @@ import { AppRoutingModule } from '../app-routing.module';
     RecipeStartComponent,
     NewRecipeComponent,
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    recipeRoutingModule,
+  ],
   exports: [
     RecipesComponent,
     RecipeDetailComponent,
@@ -26,6 +32,7 @@ import { AppRoutingModule } from '../app-routing.module';
     RecipeItemComponent,
     RecipeStartComponent,
     NewRecipeComponent,
+    recipeRoutingModule,
   ],
 })
 export class recipeModule {}
