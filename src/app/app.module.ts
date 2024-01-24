@@ -4,30 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShopingEditComponent } from './shopping-list/shoping-edit/shoping-edit.component';
-import { openDropDown } from './Directives/openDropdown.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { authComponent } from './auth/auth.component';
-import { spinnerComponent } from './Shared/spinner/spinner-component';
 import { authInterceptor } from './auth/auth.interceptor.service';
-import { alertComponent } from './Shared/alert/alert.component';
-import { helperDirective } from './Shared/helper.directive';
 import { recipeModule } from './recipes/recipe.module';
+import { shoppingModule } from './shopping-list/shopping.module';
+import { sharedModule } from './Shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    ShoppingListComponent,
-    ShopingEditComponent,
-    openDropDown,
-    authComponent,
-    spinnerComponent,
-    alertComponent,
-    helperDirective,
-  ],
+  declarations: [AppComponent, HeaderComponent, authComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -35,6 +21,8 @@ import { recipeModule } from './recipes/recipe.module';
     ReactiveFormsModule,
     AppRoutingModule,
     recipeModule,
+    shoppingModule,
+    sharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: authInterceptor, multi: true },
