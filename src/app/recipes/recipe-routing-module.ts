@@ -9,7 +9,7 @@ import { recipeRecolverGuard } from './resolve.guard.service';
 
 const root: Routes = [
   {
-    path: 'recipe',
+    path: '',
     canActivate: [authGuard],
     component: RecipesComponent,
     children: [
