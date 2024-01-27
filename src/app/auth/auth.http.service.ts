@@ -40,7 +40,6 @@ export class authService {
     // Check if token still valid or not if valid emmit user
     if (newUser.token) {
       this.userSub.next(newUser);
-      console.log(new Date(lsUser._expiresIn).getTime() - new Date().getTime());
       this.autoLogout(
         new Date(lsUser._expiresIn).getTime() - new Date().getTime()
       );

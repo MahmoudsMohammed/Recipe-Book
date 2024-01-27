@@ -50,7 +50,6 @@ export class authComponent implements OnDestroy {
     }
     obser.subscribe(
       (response) => {
-        console.log(response);
         this.router.navigate(['/recipe']);
         this.isloading = false;
       },
@@ -58,7 +57,6 @@ export class authComponent implements OnDestroy {
         this.error = errorMessage;
         this.showAlertComponent(errorMessage);
         this.isloading = false;
-        console.log(errorMessage);
       }
     );
     form.reset();
