@@ -6,7 +6,10 @@ import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 export class openDropDown {
   constructor(private El: ElementRef, private renderer: Renderer2) {}
   @HostListener('document : click', ['$event']) onClick(e: Event) {
-    if (this.El.nativeElement === e.target || this.El.nativeElement === (e.target as HTMLElement).parentElement) {
+    if (
+      this.El.nativeElement === (e.target as HTMLElement) ||
+      this.El.nativeElement === (e.target as HTMLElement).parentElement
+    ) {
       if (
         !this.El.nativeElement.nextElementSibling.classList.contains('show')
       ) {
