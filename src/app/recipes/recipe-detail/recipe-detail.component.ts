@@ -26,7 +26,16 @@ export class RecipeDetailComponent implements OnInit {
   // add ingredient to shopping service
   toShopping(e: Event) {
     this.selectedRecpe.ingred.forEach((el) => {
-      this.shoppingList.setIngredient = el;
+      let ingred = this.shoppingList.getIngredients,
+        check = true;
+      ingred.forEach((ing) => {
+        if (ing.name === el.name) {
+          check = false;
+        }
+      });
+      if (check) {
+        this.shoppingList.setIngredient = el;
+      }
     });
     e.preventDefault();
   }

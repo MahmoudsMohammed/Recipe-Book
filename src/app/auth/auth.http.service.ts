@@ -95,7 +95,7 @@ export class authService {
   }
   // Private Method Which Handle Errors at Requests
   private httpErrorHandle(error: HttpErrorResponse) {
-    let message: string;
+    let message: string = 'There is an error check your inputs';
     if (!error.error.error) {
       message = 'An unkown error occured !';
     } else {
