@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, throwError, tap, BehaviorSubject } from 'rxjs';
 import { user } from './user.model';
 import { Router } from '@angular/router';
+import { recipeService } from '../recipes/recipe.service';
 
 export interface authResponse {
   idToken: string;
@@ -15,7 +16,11 @@ export interface authResponse {
 
 @Injectable({ providedIn: 'root' })
 export class authService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private recipeServ: recipeService
+  ) {}
   userSub = new BehaviorSubject<user>(null);
   logoutTimer: any;
 
@@ -115,6 +120,7 @@ export class authService {
   logout() {
     this.userSub.next(null);
     this.router.navigate(['/auth']);
+    this.recipeServ.setRecipes([]);
     clearInterval(this.logoutTimer);
     localStorage.clear();
   }
