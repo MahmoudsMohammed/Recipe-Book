@@ -52,4 +52,17 @@ export class httpService {
         })
       );
   }
+
+  // fetch shopping List Data
+  fetchShopping() {
+    return this.http
+      .get<Ingredient[]>(
+        'https://recipe-book-4a739-default-rtdb.firebaseio.com/shopping.json'
+      )
+      .pipe(
+        tap((res) => {
+          this.shoppingServ.setShoppingList = res;
+        })
+      );
+  }
 }

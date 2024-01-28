@@ -9,6 +9,10 @@ export class shoppingService {
   get getIngredients(): Ingredient[] {
     return this.ingredients;
   }
+  set setShoppingList(list: Ingredient[]) {
+    this.ingredients.splice(0, this.ingredients.length);
+    this.ingredients.push(...list);
+  }
   set setIngredient(e) {
     this.ingredients.push(e);
   }

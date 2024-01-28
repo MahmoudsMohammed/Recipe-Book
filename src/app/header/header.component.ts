@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   onFetchData() {
     this.httpServ.fetchData().subscribe();
+    this.httpServ.fetchShopping().subscribe();
   }
   onClick() {
     this.authServ.logout();
