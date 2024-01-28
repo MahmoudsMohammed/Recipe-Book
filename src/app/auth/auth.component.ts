@@ -14,6 +14,7 @@ import { helperDirective } from '../Shared/helper.directive';
 @Component({
   selector: 'auth',
   templateUrl: './auth.component.html',
+  styleUrl: './auth.component.css',
 })
 export class authComponent implements OnDestroy {
   constructor(

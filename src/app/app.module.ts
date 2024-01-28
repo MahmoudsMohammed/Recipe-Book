@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { sharedModule } from './Shared/shared.module';
 import { coreModule } from './core.module';
 
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
