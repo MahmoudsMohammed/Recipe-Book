@@ -61,7 +61,9 @@ export class httpService {
       )
       .pipe(
         tap((res) => {
-          this.shoppingServ.setShoppingList = res;
+          if (res) {
+            this.shoppingServ.setShoppingList = res;
+          }
         })
       );
   }

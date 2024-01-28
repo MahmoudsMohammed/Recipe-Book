@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { sharedModule } from '../Shared/shared.module';
 import { authGuard } from '../auth/auth.service.guard';
+import { shoppingResolver } from './shopping.resolve.service';
 
 @NgModule({
   declarations: [ShopingEditComponent, ShoppingListComponent],
@@ -15,6 +16,7 @@ import { authGuard } from '../auth/auth.service.guard';
         canActivate:[authGuard],
         path: '',
         component: ShoppingListComponent,
+        resolve:[shoppingResolver],
       },
     ]),
     ReactiveFormsModule,
