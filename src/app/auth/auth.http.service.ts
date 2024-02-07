@@ -135,7 +135,7 @@ export class authService {
     expiresIn = new Date(new Date().getTime() + +expiresIn * 1000);
     const newUser = new user(email, id, token, expiresIn);
     this.userSub.next(newUser);
-    this.autoLogout(expiresIn.getTime());
+    this.autoLogout(expiresIn.getTime() - new Date().getTime());
     localStorage.setItem('userData', JSON.stringify(newUser));
   }
 }
