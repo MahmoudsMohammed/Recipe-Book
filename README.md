@@ -1,27 +1,63 @@
-# RecipeBook
+# Recipe-Book
+
+Single Page App (SPA) manages recipes and their ingredient.
+
+## Table of contents
+
+- [Overview](#overview)
+  - [Recipe-Book features](#Recipe-Book-features)
+  - [project Details](#Project-Details)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+- [Author](#author)
+
+## Overview
+
+### Recipe-Book features
+
+Users should be able to:
+
+- Authentication using email and password.
+- Create , read , update and delete recipes and ingredient.
+- Add recipe ingredient to shopping list.
+- Fetching and saving data at firebase database.
+
+## Project Details
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
-## Development server
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Links
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Live Site URL : [Recipe-Book](https://recipe-book-4a739.web.app)
 
-## Build
+## My process
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Built with
 
-## Running unit tests
+- Angular
+- Angular CLI
+- TypeScript
+- Bootstrap
+- Firebase
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### What I learned
 
-## Running end-to-end tests
+- How structure the project Folders and files.
+- Using Git and Github.
+- Responsive Design based on the viewport.
+- Make authentication using firebase.
+- Route Guard to prevent unauthorized access and Resolve Guard to get data before accessing a component.
+- Interceptors to handle requests before and after leaving the app.
+- Lazy load which improve the app performance and initial start.
+- Services, Models, Directives,Reactive and Template Driven Forms, and more of the core concepts of Angular help create SPA(single page application).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Author
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Linkedin - [Mahmoud Sayed](https://www.linkedin.com/in/mahmoud-sayed-b85536217/)
+- Codewars - [@MahmoudsMohammed](https://www.codewars.com/users/MahmoudsMohammed)
